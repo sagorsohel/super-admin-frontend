@@ -4,24 +4,27 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
+  const [loading,setLoading] = useState(false);
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/superadmin/login`, {
         email,
         password,
       }, { withCredentials: true });
 
       if (res.data.success) {
-        console.log(res)
+         setLoading(false);
         localStorage.setItem("token", res.data.token);
         navigate("/dashboard");
       }
     } catch (err) {
       alert(err.response?.data?.message || "Login failed");
+       setLoading(false);
     }
   };
 
@@ -44,7 +47,7 @@ export default function Login() {
           className="w-full p-2 mb-3 border rounded"
         />
         <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded">
-          Login
+         {loading? 'Logging in...':'login'} 
         </button>
       </form>
     </div>
