@@ -10,7 +10,7 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:4000/api/superadmin/login", {
+      const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/superadmin/login`, {
         email,
         password,
       }, { withCredentials: true });
