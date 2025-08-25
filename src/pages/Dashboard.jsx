@@ -44,6 +44,8 @@ export default function Dashboard() {
         }
       );
 
+
+      console.log(res)
       if (res.data.success) {
         setMessage("Customer created successfully ✅");
         setForm({ name: "", shopName: "", email: "", password: "", subdomain: "" });
