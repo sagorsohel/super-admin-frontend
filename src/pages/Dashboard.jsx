@@ -129,7 +129,10 @@ export default function Dashboard() {
             readOnly
           />
           <span className="absolute right-3 top-2 text-gray-500 text-sm">
-            http://{form.subdomain || "yourshop"}.localhost:5174
+          
+            {import.meta.env.DEV
+              ? `http://${form.subdomain}.localhost:5174`
+              : `https://${form.subdomain}.${import.meta.env.VITE_LANDING_URL}`}
           </span>
         </div>
 
@@ -150,7 +153,7 @@ export default function Dashboard() {
         />
 
         <button type="submit" className="bg-green-600 text-white py-2 rounded">
-           {loading ? "Creating..." : "Create Customer"}
+          {loading ? "Creating..." : "Create Customer"}
         </button>
       </form>
 
